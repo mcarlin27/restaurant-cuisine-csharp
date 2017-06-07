@@ -14,7 +14,6 @@ namespace Restaurant
       _id = Id;
       _name = Name;
     }
-
     public override bool Equals(System.Object otherCuisine)
     {
       if (!(otherCuisine is Cuisine))
@@ -29,8 +28,6 @@ namespace Restaurant
         return (idEquality && nameEquality);
       }
     }
-
-
     public int GetId()
     {
       return _id;
@@ -44,14 +41,43 @@ namespace Restaurant
       _name = newName;
     }
 
-    // public static void DeleteAll()
-    //   {
-    //     SqlConnection conn = DB.Connection();
-    //     conn.Open();
-    //     SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
-    //     cmd.ExecuteNonQuery();
-    //     conn.Close();
-    //   }
+    public static List<Cuisine> GetAll()
+    {
+      List<Cuisine> allCuisines = new List<Cuisine>{};
+
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM cuisines;", conn);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        int cuisineId = rdr.GetInt32(0);
+        string cuisineName = rdr.GetString(1);
+        Cuisine newCuisine = new Cuisine(cuisineName, cuisineId);
+        allCuisines.Add(newCuisine);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allCuisines;
+    }
+
+    public static void DeleteAll()
+      {
+        SqlConnection conn = DB.Connection();
+        conn.Open();
+        SqlCommand cmd = new SqlCommand("DELETE FROM cuisines;", conn);
+        cmd.ExecuteNonQuery();
+        conn.Close();
+      }
 
 
   }
