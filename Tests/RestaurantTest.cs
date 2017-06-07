@@ -12,6 +12,10 @@ namespace Restaurant
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=restaurant_test;Integrated Security=SSPI;";
     }
+    public void Dispose()
+    {
+      Restaurant.DeleteAll();
+    }
     [Fact]
     public void Test_DatabaseEmptyAtFirst()
     {
@@ -28,14 +32,41 @@ namespace Restaurant
       //Assert
       Assert.Equal(firstRestaurant, secondRestaurant);
     }
-    
+    [Fact]
+    public void Test_Save_SavesToDatabase()
     {
-
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("Saburos", 1);
+      //Act
+      testRestaurant.Save();
+      List<Restaurant> result = Restaurant.GetAll();
+      List<Restaurant> testList = new List<Restaurant>{testRestaurant};
+      //Assert
+      Assert.Equal(testList, result);
     }
-    public void Dispose()
+    [Fact]
+    public void Test_Save_AssignsIdToObject()
     {
-      Restaurant.DeleteAll();
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("Saburos", 1);
+      //Act
+      testRestaurant.Save();
+      Restaurant savedRestaurant = Restaurant.GetAll()[0];
+      int result = savedRestaurant.GetId();
+      int testId = testRestaurant.GetId();
+      //Assert
+      Assert.Equal(testId, result);
     }
-
+    [Fact]
+    public void Test_Find_FindsRestaurantInDatabase()
+    {
+      //Arrange
+      Restaurant testRestaurant = new Restaurant("Saburos", 1);
+      testRestaurant.Save();
+      //Act
+      Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
+      //Assert
+      Assert.Equal(testRestaurant, foundRestaurant);
+    }
   }
 }

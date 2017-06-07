@@ -12,16 +12,16 @@ A website created with C# and HTML where a ...
 ### Specs
 | Spec | Input | Output |
 | :-------------     | :------------- | :------------- |
-| **User can add cuisine type to DB** | add Japanese | Japanese |
-| **User can view all cuisine types** | View All Cuisines  | Japanese, Tex-Mex, Modern American, Tapas |
+| X**User can add cuisine type to DB** | add Japanese | Japanese |
+| X**User can view all cuisine types** | View All Cuisines  | Japanese, Tex-Mex, Modern American, Tapas |
 | **User can update existing cuisine types**| Edit Tex-Mex | Mexican |
-| **User can delete all cuisine types**| Delete All Cuisine Types | List Cleared! |
+| X**User can delete all cuisine types**| Delete All Cuisine Types | List Cleared! |
 | **User can delete individual cuisines** | Delete: Japanese | "Japanese cuisine has been deleted!" |
-| **User can add restaurant to DB** | add Saburo's | Saburo's |
-| **User can add cuisine type to restaurant** | Saburo's | Saburo's: Sushi |
-| **User can view all restaurants** | View All Restaurants  | Saburo's, Jam, Tom Yum |
+| X**User can add restaurant to DB** | add Saburo's | Saburo's |
+| X**User can add cuisine type to restaurant** | Saburo's | Saburo's: Sushi |
+| X**User can view all restaurants** | View All Restaurants  | Saburo's, Jam, Tom Yum |
 | **User can update existing restaurant**| Edit Tani's | Shoko's Sushi |
-| **User can delete all restaurants**| Delete All Restaurants | List Cleared! |
+| X**User can delete all restaurants**| Delete All Restaurants | List Cleared! |
 | **User can delete individual restaurants** | Delete: Shoko's | "Shoko's has been deleted!" |
 | **User can query restaurants by cuisine** | View All: Sushi | Shoko's, Saburo's |
 
