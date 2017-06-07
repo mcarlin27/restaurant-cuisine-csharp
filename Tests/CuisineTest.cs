@@ -21,7 +21,6 @@ namespace Restaurant
         //Assert
         Assert.Equal(0, result);
       }
-
     [Fact]
     public void Test_Equal_ReturnsTrueForSameName()
     {
@@ -32,7 +31,6 @@ namespace Restaurant
       //Assert
       Assert.Equal(firstCuisine, secondCuisine);
     }
-
     [Fact]
     public void Test_Save_SavesCuisineToDatabase()
     {
@@ -47,7 +45,6 @@ namespace Restaurant
       //Assert
       Assert.Equal(testList, result);
     }
-
     [Fact]
     public void Test_Save_AssignsIdToCuisineObject()
     {
@@ -64,8 +61,19 @@ namespace Restaurant
       //Assert
       Assert.Equal(testId, result);
     }
+    [Fact]
+    public void Test_Find_FindsCuisineInDatabase()
+    {
+      //Arrange
+      Cuisine testCuisine = new Cuisine("Japanese");
+      testCuisine.Save();
 
+      //Act
+      Cuisine foundCuisine = Cuisine.Find(testCuisine.GetId());
 
+      //Assert
+      Assert.Equal(testCuisine, foundCuisine);
+    }
     public void Dispose()
     {
       // Restaurant.DeleteAll();
