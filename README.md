@@ -23,7 +23,7 @@ A website created with C# and HTML where a ...
 | **User can update existing restaurant**| Edit Tani's | Shoko's Sushi |
 | X**User can delete all restaurants**| Delete All Restaurants | List Cleared! |
 | **User can delete individual restaurants** | Delete: Shoko's | "Shoko's has been deleted!" |
-| **User can query restaurants by cuisine** | View All: Sushi | Shoko's, Saburo's |
+| X**User can query restaurants by cuisine** | View All: Sushi | Shoko's, Saburo's |
 
 ## Setup/Installation Requirements
 

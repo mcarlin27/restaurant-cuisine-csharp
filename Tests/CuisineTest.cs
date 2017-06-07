@@ -79,6 +79,21 @@ namespace Restaurant
       // Restaurant.DeleteAll();
       Cuisine.DeleteAll();
     }
+    // [Fact]
+    // public void Test_Update_ReturnsTrueIfCuisinesAreTheSame()
+    // {
+    //   //Arrange
+    //   Cuisine testCuisine = new Cuisine("Japanese", 2);
+    //   testCuisine.Save();
+    //   Cuisine controlCuisine = new Cuisine("Mexican", 2);
+    //   controlCuisine.Save();
+    //
+    //   //Act
+    //   testCuisine.Update("Mexican");
+    //
+    //   //Assert
+    //   Assert.Equal(controlCuisine, testCuisine);
+    // }
 
   }
 }
