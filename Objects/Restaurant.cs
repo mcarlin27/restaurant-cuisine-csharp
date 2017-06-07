@@ -126,7 +126,7 @@ namespace Restaurant
       }
       return allRestaurants;
     }
-    
+
     public static Restaurant Find(int id)
     {
       SqlConnection conn = DB.Connection();
@@ -161,6 +161,34 @@ namespace Restaurant
       return foundRestaurant;
     }
 
+    public static List<Restaurant> ByCuisine()
+    {
+      List<Restaurant> AllRestaurants = new List<Restaurant>{};
+
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM restaurants ORDER BY cuisine_id", conn);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while (rdr.Read())
+      {
+        int restaurantId = rdr.GetInt32(0);
+        string restaurantName = rdr.GetString(1);
+        int cuisineId = rdr.GetInt32(2);
+        Restaurant newRestaurant = new Restaurant(restaurantName, cuisineId, restaurantId);
+        AllRestaurants.Add(newRestaurant);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return AllRestaurants;
+    }
 
 
   }

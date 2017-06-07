@@ -68,5 +68,21 @@ namespace Restaurant
       //Assert
       Assert.Equal(testRestaurant, foundRestaurant);
     }
+    [Fact]
+    public void Test_ByCuisine_ReturnsTrueIfListsAreTheSame()
+    {
+      //Arrange
+      Cuisine newCuisine = new Cuisine("Sushi");
+      Restaurant firstRestaurant = new Restaurant("Sushi Sakura", 1, newCuisine.GetId());
+      Restaurant secondRestaurant = new Restaurant("Saburos", 2, newCuisine.GetId());
+      //Act
+      newCuisine.Save();
+      firstRestaurant.Save();
+      secondRestaurant.Save();
+      List<Restaurant> result = Restaurant.ByCuisine();
+      List<Restaurant> testList = new List<Restaurant>{firstRestaurant, secondRestaurant};
+      //Assert
+      Assert.Equal(testList, result);
+    }
   }
 }
