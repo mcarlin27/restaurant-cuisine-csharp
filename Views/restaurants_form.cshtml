@@ -5,8 +5,8 @@
 <div class="container">
   <h1>Add a new restaurant</h1>
   <form action="/restaurants/new" method="post">
-    <label for="restaurant-description">Restaurant description:</label>
-    <input id="restaurant-description" name="restaurant-description" type="text">
+    <label for="restaurant-name">Restaurant Name:</label>
+    <input id="restaurant-name" name="restaurant-name" type="text">
     <select name="cuisine-id">
       @foreach (var cuisine in Model)
       {

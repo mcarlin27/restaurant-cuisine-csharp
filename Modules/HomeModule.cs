@@ -22,7 +22,6 @@ namespace Restaurant
         return View["restaurants.cshtml", allRestaurants];
       }; //list of all restaurants
 
-
       Get["/cuisines/new"] = _ => {
         return View["cuisines_form.cshtml"];
       }; //navigates to form to add new cuisine
@@ -39,7 +38,7 @@ namespace Restaurant
       }; //navigates to form to add new restaurant
 
       Post["/restaurants/new"] = _ => {
-        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-description"], Request.Form["cuisine-id"]);
+        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-name"], Request.Form["cuisine-id"]);
         newRestaurant.Save();
         return View["success.cshtml"];
       }; //posts from form adding new restaurant

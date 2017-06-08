@@ -5,6 +5,8 @@
 <div class="container">
   <h1>@Model.GetName()</h1>
 
+  <a href="/restaurant/edit/@Model.GetId()">Edit this restaurant!</a>
+  <a href="/restaurant/delete/@Model.GetId()">Delete this restaurant!</a>
   <a href="/restaurants/new">Add another restaurant</a>
   <a href="/restaurants">View all restaurants</a>
   <a href="/">Return Home</a>
