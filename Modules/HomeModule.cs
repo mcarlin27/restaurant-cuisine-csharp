@@ -78,14 +78,19 @@ namespace Restaurant
       }; //returns edited cuisine page
 
       Get["cuisine/delete/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
-        return View["cuisine_delete.cshtml", SelectedCuisine];
+        string cuisineDelete = Request.Query["cuisine-delete"];
+        model.Add("form-type", cuisineDelete);
+        model.Add("cuisine", SelectedCuisine);
+        return View["delete.cshtml", model];
       }; //delete individual cuisine
 
       Delete["cuisine/delete/{id}"] = parameters => {
         Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
         SelectedCuisine.Delete();
-        return View["success.cshtml"];
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["cuisines.cshtml", allCuisines];
       }; //returns confirmation of deleted cuisine
 
       Get["/restaurants/{id}"] = parameters => {
@@ -105,14 +110,19 @@ namespace Restaurant
       }; //returns edited restaurant page
 
       Get["restaurant/delete/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
-        return View["restaurant_delete.cshtml", SelectedRestaurant];
+        string restaurantDelete = Request.Query["restaurant-delete"];
+        model.Add("form-type", restaurantDelete);
+        model.Add("restaurant", SelectedRestaurant);
+        return View["delete.cshtml", model];
       }; //delete individual restaurant
 
       Delete["restaurant/delete/{id}"] = parameters => {
         Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
         SelectedRestaurant.Delete();
-        return View["success.cshtml"];
+        List<Restaurant> allRestaurants = Restaurant.GetAll();
+        return View["restaurants.cshtml", allRestaurants];
       }; //returns confirmation of deleted restaurant
     }
   }

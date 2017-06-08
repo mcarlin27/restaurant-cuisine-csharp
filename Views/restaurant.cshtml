@@ -7,7 +7,10 @@
   <h2>@Model.GetDescription()</h2>
 
   <a href="/restaurant/edit/@Model.GetId()">Edit this restaurant!</a>
-  <a href="/restaurant/delete/@Model.GetId()">Delete this restaurant!</a>
+
+  <form action='/restaurant/delete/@Model.GetId()' method="get">
+      <input type="hidden" name="restaurant-delete" id="restaurant-delete" value="restaurant-delete"><button type="submit">Delete this Restaurant</button>
+  </form>
   <a href="/restaurants/new">Add another restaurant</a>
   <a href="/restaurants">View all restaurants</a>
   <a href="/">Return Home</a>

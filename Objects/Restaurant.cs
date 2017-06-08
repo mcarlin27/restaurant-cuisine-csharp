@@ -35,17 +35,9 @@ namespace Restaurant
     {
       return _description;
     }
-    public void SetDescription(string newDescription)
-    {
-      _description = newDescription;
-    }
     public int GetCuisineId()
     {
       return _cuisineId;
-    }
-    public void SetCuisineId(int newCuisineId)
-    {
-      _cuisineId = newCuisineId;
     }
 
     public override bool Equals(System.Object otherRestaurant)
