@@ -27,8 +27,8 @@ namespace Restaurant
     public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
     {
       //Arrange, Act
-      Restaurant firstRestaurant = new Restaurant("Saburos", 1);
-      Restaurant secondRestaurant = new Restaurant("Saburos", 1);
+      Restaurant firstRestaurant = new Restaurant("Saburos", "a sushi place", 1);
+      Restaurant secondRestaurant = new Restaurant("Saburos", "a sushi place", 1);
       //Assert
       Assert.Equal(firstRestaurant, secondRestaurant);
     }
@@ -36,7 +36,7 @@ namespace Restaurant
     public void Test_Save_SavesToDatabase()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("Saburos", 1);
+      Restaurant testRestaurant = new Restaurant("Saburos", "a sushi place", 1);
       //Act
       testRestaurant.Save();
       List<Restaurant> result = Restaurant.GetAll();
@@ -48,7 +48,7 @@ namespace Restaurant
     public void Test_Save_AssignsIdToObject()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("Saburos", 1);
+      Restaurant testRestaurant = new Restaurant("Saburos", "a sushi place", 1);
       //Act
       testRestaurant.Save();
       Restaurant savedRestaurant = Restaurant.GetAll()[0];
@@ -61,7 +61,7 @@ namespace Restaurant
     public void Test_Find_FindsRestaurantInDatabase()
     {
       //Arrange
-      Restaurant testRestaurant = new Restaurant("Saburos", 1);
+      Restaurant testRestaurant = new Restaurant("Saburos", "a sushi place", 1);
       testRestaurant.Save();
       //Act
       Restaurant foundRestaurant = Restaurant.Find(testRestaurant.GetId());
@@ -73,8 +73,8 @@ namespace Restaurant
     {
       //Arrange
       Cuisine newCuisine = new Cuisine("Sushi");
-      Restaurant firstRestaurant = new Restaurant("Sushi Sakura", 1, newCuisine.GetId());
-      Restaurant secondRestaurant = new Restaurant("Saburos", 2, newCuisine.GetId());
+      Restaurant firstRestaurant = new Restaurant("Sushi Sakura", "a sushi place", 1, newCuisine.GetId());
+      Restaurant secondRestaurant = new Restaurant("Saburos", "a sushi place", 2, newCuisine.GetId());
       //Act
       newCuisine.Save();
       firstRestaurant.Save();

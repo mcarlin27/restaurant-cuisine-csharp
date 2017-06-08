@@ -179,8 +179,9 @@ namespace Restaurant
       {
         int restaurantId = rdr.GetInt32(0);
         string restaurantName = rdr.GetString(1);
-        int restaurantCuisineId = rdr.GetInt32(2);
-        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantCuisineId, restaurantId);
+        string restaurantDescription = rdr.GetString(2);
+        int restaurantCuisineId = rdr.GetInt32(3);
+        Restaurant newRestaurant = new Restaurant(restaurantName, restaurantDescription, restaurantCuisineId, restaurantId);
         restaurants.Add(newRestaurant);
       }
       if (rdr != null)

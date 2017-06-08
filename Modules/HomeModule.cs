@@ -38,7 +38,7 @@ namespace Restaurant
       }; //navigates to form to add new restaurant
 
       Post["/restaurants/new"] = _ => {
-        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-name"], Request.Form["cuisine-id"]);
+        Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-name"], Request.Form["restaurant-description"], Request.Form["cuisine-id"]);
         newRestaurant.Save();
         return View["success.cshtml"];
       }; //posts from form adding new restaurant
@@ -100,7 +100,7 @@ namespace Restaurant
 
       Patch["/restaurant/edit/{id}"] = parameters => {
         Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
-        SelectedRestaurant.Update(Request.Form["restaurant-name"]);
+        SelectedRestaurant.Update(Request.Form["restaurant-name"], Request.Form["restaurant-description"]);
         return View["restaurant.cshtml", SelectedRestaurant];
       }; //returns edited restaurant page
 
