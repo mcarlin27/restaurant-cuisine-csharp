@@ -79,6 +79,31 @@ namespace Restaurant
       //Assert
       Assert.Equal(firstContactInfo, secondContactInfo);
     }
+    [Fact]
+    public void Test_Delete_ReturnsTrueIfListsAreTheSame()
+    {
+      //Arrange
+      ContactInfo firstContactInfo = new ContactInfo("123 First st. Portland, OR", 1234567890, 2);
+      firstContactInfo.Save();
+
+      ContactInfo secondContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, 2);
+      secondContactInfo.Save();
+
+      ContactInfo thirdContactInfo = new ContactInfo("316 10th st. Brooklyn, NY", 2024567890, 2);
+      thirdContactInfo.Save();
+
+      List<ContactInfo> expectedList = new List<ContactInfo>{firstContactInfo, secondContactInfo};
+
+      //Act
+      thirdContactInfo.Delete();
+      List<ContactInfo> contactList = ContactInfo.GetAll();
+
+      //Assert
+      Assert.Equal(contactList, expectedList);
+
+    }
+
+
     public void Dispose()
     {
       ContactInfo.DeleteAll();

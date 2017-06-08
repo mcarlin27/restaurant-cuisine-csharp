@@ -189,6 +189,26 @@ namespace Restaurant
       return foundContactInfo;
     }
 
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM contacts WHERE id = @ContactId;", conn);
+
+      SqlParameter contactIdParameter = new SqlParameter();
+      contactIdParameter.ParameterName = "@ContactId";
+      contactIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(contactIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
