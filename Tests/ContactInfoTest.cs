@@ -45,5 +45,32 @@ namespace Restaurant
     {
       ContactInfo.DeleteAll();
     }
+    [Fact]
+    public void Test_Save_AssignsIdToObject()
+    {
+      //Arrange
+      ContactInfo testContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, 1);
+      //Act
+      testContactInfo.Save();
+      ContactInfo savedContactInfo = ContactInfo.GetAll()[0];
+      int result = savedContactInfo.GetId();
+      int testId = testContactInfo.GetId();
+      //Assert
+      Assert.Equal(testId, result);
+    }
+    [Fact]
+    public void Test_Find_FindsContactInfoInDatabase()
+    {
+      //Arrange
+      ContactInfo testContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, 1);
+      testContactInfo.Save();
+      //Act
+      ContactInfo foundContactInfo = ContactInfo.Find(testContactInfo.GetId());
+      //Assert
+      Assert.Equal(testContactInfo, foundContactInfo);
+    }
+
+
+
   }
 }

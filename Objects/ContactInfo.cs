@@ -121,6 +121,45 @@ namespace Restaurant
       return allContacts;
     }
 
+    public static ContactInfo Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM contacts WHERE id = @ContactId;", conn);
+      SqlParameter contactIdParameter = new SqlParameter();
+      contactIdParameter.ParameterName = "@ContactId";
+      contactIdParameter.Value = id.ToString();
+      cmd.Parameters.Add(contactIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundContactId = 0;
+      string foundContactAddress = null;
+      int foundContactPhone = 0;
+      int foundRestaurantId = 0;
+      while(rdr.Read())
+      {
+        foundContactId = rdr.GetInt32(0);
+        foundContactAddress = rdr.GetString(1);
+        foundContactPhone = rdr.GetInt32(2);
+        foundRestaurantId = rdr.GetInt32(3);
+      }
+      ContactInfo foundContactInfo = new ContactInfo(foundContactAddress, foundContactPhone, foundRestaurantId,  foundContactId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return foundContactInfo;
+    }
+
+
+
+
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
