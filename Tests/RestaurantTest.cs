@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace Restaurant
 {
+  [Collection("Restaurant")]
   public class RestaurantTest : IDisposable
   {
     public RestaurantTest()
