@@ -20,6 +20,15 @@ namespace Restaurant
 
       Assert.Equal(0, result);
     }
+    [Fact]
+    public void Test_Equal_ReturnsTrueIfAddressesAreTheSame()
+    {
+      //Arrange, Act
+      ContactInfo firstContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, 1);
+      ContactInfo secondContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, 1);
+      //Assert
+      Assert.Equal(firstContactInfo, secondContactInfo);
+    }
     public void Dispose()
     {
       ContactInfo.DeleteAll();
