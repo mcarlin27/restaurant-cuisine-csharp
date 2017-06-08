@@ -19,7 +19,10 @@
       }
     </ol>
   }
-  <p><a href='/cuisine/edit/@Model["cuisine"].GetId()'>Edit this cuisine!</a></p>
+
+  <form action='/cuisine/edit/@Model["cuisine"].GetId()' method="get">
+      <input type="hidden" name="cuisine-edit" id="cuisine-edit" value="cuisine-edit"><button type="submit">Edit this Cuisine</button>
+  </form>
   <form action='/cuisine/delete/@Model["cuisine"].GetId()' method="get">
       <input type="hidden" name="cuisine-delete" id="cuisine-delete" value="cuisine-delete"><button type="submit">Delete this Cuisine</button>
   </form>

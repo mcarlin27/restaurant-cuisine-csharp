@@ -65,9 +65,13 @@ namespace Restaurant
       }; //retrieves individual cuisine pages
 
       Get["/cuisine/edit/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         Cuisine SelectedCuisine = Cuisine.Find(parameters.id);
-        return View["cuisine_edit.cshtml", SelectedCuisine];
-      }; //edit individual cuisines
+        string cuisineEdit = Request.Query["cuisine-edit"];
+        model.Add("form-type", cuisineEdit);
+        model.Add("cuisine", SelectedCuisine);
+        return View["edit.cshtml", model];
+      }; //edit individual cuisine
 
       Patch["/cuisine/edit/{id}"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
@@ -101,8 +105,12 @@ namespace Restaurant
       }; //retrieves individual restaurant pages
 
       Get["/restaurant/edit/{id}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
         Restaurant SelectedRestaurant = Restaurant.Find(parameters.id);
-        return View["restaurant_edit.cshtml", SelectedRestaurant];
+        string restaurantEdit = Request.Query["restaurant-edit"];
+        model.Add("form-type", restaurantEdit);
+        model.Add("restaurant", SelectedRestaurant);
+        return View["edit.cshtml", model];
       }; //edit individual restaurants
 
       Patch["/restaurant/edit/{id}"] = parameters => {
@@ -125,7 +133,7 @@ namespace Restaurant
         SelectedRestaurant.Delete();
         List<Restaurant> allRestaurants = Restaurant.GetAll();
         return View["restaurants.cshtml", allRestaurants];
-      }; //returns confirmation of deleted restaurant
+      }; //returns list of all restaurants
     }
   }
 }

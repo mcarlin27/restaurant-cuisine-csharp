@@ -1,0 +1,40 @@
+@{
+  Layout="Shared/_Layout";
+}
+
+@if(Model["form-type"] == "cuisine-edit")
+{
+  <div class="container">
+    <h1>Edit Cuisine</h1>
+    <hr />
+    <h3>@Model["cuisine"].GetName()</h3>
+    <form action='/cuisine/edit/@Model["cuisine"].GetId()' method="post">
+      <input type="hidden" name="_method" value="PATCH">
+      <input name="cuisine-id" type="hidden" value='@Model["cuisine"].GetId()'>
+      <label for="cuisine-name">Category name</label>
+      <input id="cuisine-name" name="cuisine-name" type="text" value='@Model["cuisine"].GetName()'>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+}
+
+@if(Model["form-type"] == "restaurant-edit")
+{
+  <div class="container">
+    <h1>Edit Restaurant</h1>
+    <hr />
+    <h2>@Model["restaurant"].GetName()</h2>
+    <form action='/restaurant/edit/@Model["restaurant"].GetId()' method="post">
+      <input type="hidden" name="_method" value="PATCH">
+      <input name="restaurant-id" type="hidden" value='@Model["restaurant"].GetId()'>
+
+      <label for="restaurant-name">Restaurant Name</label>
+      <input id="restaurant-name" name="restaurant-name" type="text" value='@Model["restaurant"].GetName()'>
+
+      <label for="restaurant-description">Restaurant Description</label>
+      <input id="restaurant-description" name="restaurant-description" type="text" value='@Model["restaurant"].GetDescription()'>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+}

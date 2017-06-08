@@ -6,8 +6,9 @@
   <h1>@Model.GetName()</h1>
   <h2>@Model.GetDescription()</h2>
 
-  <a href="/restaurant/edit/@Model.GetId()">Edit this restaurant!</a>
-
+  <form action='/restaurant/edit/@Model.GetId()' method="get">
+      <input type="hidden" name="restaurant-edit" id="restaurant-edit" value="restaurant-edit"><button type="submit">Edit this Restaurant</button>
+  </form>
   <form action='/restaurant/delete/@Model.GetId()' method="get">
       <input type="hidden" name="restaurant-delete" id="restaurant-delete" value="restaurant-delete"><button type="submit">Delete this Restaurant</button>
   </form>
