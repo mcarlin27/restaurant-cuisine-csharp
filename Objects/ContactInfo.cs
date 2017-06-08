@@ -122,6 +122,45 @@ namespace Restaurant
       }
     }
 
+    public void Update(int newPhone, int newRestaurantId)
+    { //Update method for integers
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE contacts SET phone = @NewPhone, restaurant_id = @NewRestaurantId OUTPUT INSERTED.phone, INSERTED.restaurant_id WHERE id = @ContactId;", conn);
+
+      SqlParameter newPhoneParameter = new SqlParameter();
+      newPhoneParameter.ParameterName = "@NewPhone";
+      newPhoneParameter.Value = newPhone;
+      cmd.Parameters.Add(newPhoneParameter);
+
+      SqlParameter newRestaurantIdParameter = new SqlParameter();
+      newRestaurantIdParameter.ParameterName = "@NewRestaurantId";
+      newRestaurantIdParameter.Value = newRestaurantId;
+      cmd.Parameters.Add(newRestaurantIdParameter);
+
+      SqlParameter contactIdParameter = new SqlParameter();
+      contactIdParameter.ParameterName = "@ContactId";
+      contactIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(contactIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._phone = rdr.GetInt32(0);
+        this._restaurantId = rdr.GetInt32(1);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+
     public static List<ContactInfo> GetAll()
     {
       List<ContactInfo> allContacts = new List<ContactInfo> {};

@@ -100,7 +100,21 @@ namespace Restaurant
 
       //Assert
       Assert.Equal(contactList, expectedList);
+    }
+    [Fact]
+    public void Test_Update_ReturnsTrueIfRestaurantIdsAreTheSame()
+    {
+      //Arrange
+      Restaurant newRestaurant = new Restaurant("Saburos", "a sushi place", 1);
+      newRestaurant.Save();
+      ContactInfo firstContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, newRestaurant.GetId());
+      firstContactInfo.Save();
+      ContactInfo secondContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 1234567890, 3, firstContactInfo.GetId());
+      //Act
+      secondContactInfo.Update(2128675309, firstContactInfo.GetRestaurantId());
 
+      //Assert
+      Assert.Equal(firstContactInfo, secondContactInfo);
     }
 
 
