@@ -34,7 +34,7 @@ namespace Restaurant
 
       Get["/restaurants/new"] = _ => {
         List<Cuisine> AllCuisines = Cuisine.GetAll();
-        return View["restaurants_form.cshtml", AllCuisines];
+        return View["restaurant_form.cshtml", AllCuisines];
       }; //navigates to form to add new restaurant
 
       Post["/restaurants/new"] = _ => {

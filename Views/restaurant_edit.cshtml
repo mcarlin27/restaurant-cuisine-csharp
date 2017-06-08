@@ -9,8 +9,13 @@
   <form action="/restaurant/edit/@Model.GetId()" method="post">
     <input type="hidden" name="_method" value="PATCH">
     <input name="restaurant-id" type="hidden" value="@Model.GetId()">
-    <label for="restaurant-name">Restaurant name</label>
-    <input id="restaurant-name" name="restaurant-name" type="text">
+
+    <label for="restaurant-name">Restaurant Name</label>
+    <input id="restaurant-name" name="restaurant-name" type="text" value="@Model.GetName()">
+
+    <label for="restaurant-description">Restaurant Description</label>
+    <input id="restaurant-description" name="restaurant-description" type="text" value="@Model.GetDescription()">
+
     <button type="submit">Submit</button>
   </form>
   <h4><a href="/">Return home</a></h4>
