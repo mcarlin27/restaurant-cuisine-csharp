@@ -118,7 +118,7 @@ namespace Restaurant
       {
         conn.Close();
       }
-    }
+    } //SQL allows multiple methods with the same name as long as they work on different variable types
 
     public static List<Restaurant> GetAll()
     {
