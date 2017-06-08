@@ -29,8 +29,9 @@ namespace Restaurant
       Post["/cuisines/new"] = _ => {
         Cuisine newCuisine = new Cuisine(Request.Form["cuisine-name"]);
         newCuisine.Save();
-        return View["success.cshtml"];
-      }; //posts from form adding new cuisine
+        List<Cuisine> allCuisines = Cuisine.GetAll();
+        return View["cuisines.cshtml", allCuisines];
+      }; //posts from form adding new cuisine, returns list of all cuisines
 
       Get["/restaurants/new"] = _ => {
         List<Cuisine> AllCuisines = Cuisine.GetAll();
@@ -40,8 +41,9 @@ namespace Restaurant
       Post["/restaurants/new"] = _ => {
         Restaurant newRestaurant = new Restaurant(Request.Form["restaurant-name"], Request.Form["restaurant-description"], Request.Form["cuisine-id"]);
         newRestaurant.Save();
-        return View["success.cshtml"];
-      }; //posts from form adding new restaurant
+        List<Restaurant> allRestaurants = Restaurant.GetAll();
+        return View["restaurants.cshtml", allRestaurants];
+      }; //posts from form adding new restaurant, returns list of all restaurants
 
       Post["/cuisines/clear"] = _ => {
         Cuisine.DeleteAll();
