@@ -132,7 +132,39 @@ namespace Restaurant
       {
         conn.Close();
       }
-    } //SQL allows multiple methods with the same name as long as they work on different variable types
+    }
+
+    public void Update(int newCuisineId)
+    { //Update method for integers
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE restaurants SET cuisine_id = @NewCuisineId OUTPUT INSERTED.cuisine_id WHERE id = @RestaurantId;", conn);
+
+      SqlParameter newCuisineIdParameter = new SqlParameter();
+      newCuisineIdParameter.ParameterName = "@NewCuisineId";
+      newCuisineIdParameter.Value = newCuisineId;
+      cmd.Parameters.Add(newCuisineIdParameter);
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._cuisineId = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
 
     public static List<Restaurant> GetAll()
     {
