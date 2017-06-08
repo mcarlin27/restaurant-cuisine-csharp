@@ -29,6 +29,18 @@ namespace Restaurant
       //Assert
       Assert.Equal(firstContactInfo, secondContactInfo);
     }
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      //Arrange
+      ContactInfo testContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, 1);
+      //Act
+      testContactInfo.Save();
+      List<ContactInfo> result = ContactInfo.GetAll();
+      List<ContactInfo> testList = new List<ContactInfo>{testContactInfo};
+      //Assert
+      Assert.Equal(testList, result);
+    }
     public void Dispose()
     {
       ContactInfo.DeleteAll();

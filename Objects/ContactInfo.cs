@@ -51,6 +51,45 @@ namespace Restaurant
       }
     }
 
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO contacts (address, phone, restaurant_id) OUTPUT INSERTED.id VALUES (@ContactInfoAddress, @ContactInfoPhone, @ContactRestaurantId);", conn);
+
+      SqlParameter addressParameter = new SqlParameter();
+      addressParameter.ParameterName = "@ContactInfoAddress";
+      addressParameter.Value = this.GetAddress();
+
+      SqlParameter phoneParameter = new SqlParameter();
+      phoneParameter.ParameterName = "@ContactInfoPhone";
+      phoneParameter.Value = this.GetPhone();
+
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@ContactRestaurantId";
+      restaurantIdParameter.Value = this.GetRestaurantId();
+
+      cmd.Parameters.Add(addressParameter);
+      cmd.Parameters.Add(phoneParameter);
+      cmd.Parameters.Add(restaurantIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     public static List<ContactInfo> GetAll()
     {
       List<ContactInfo> allContacts = new List<ContactInfo> {};
