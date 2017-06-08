@@ -90,6 +90,38 @@ namespace Restaurant
       }
     }
 
+    public void Update(string newAddress)
+    { //Update method for strings
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE contacts SET address = @NewAddress OUTPUT INSERTED.address WHERE id = @ContactId;", conn);
+
+      SqlParameter newAddressParameter = new SqlParameter();
+      newAddressParameter.ParameterName = "@NewAddress";
+      newAddressParameter.Value = newAddress;
+      cmd.Parameters.Add(newAddressParameter);
+
+      SqlParameter contactIdParameter = new SqlParameter();
+      contactIdParameter.ParameterName = "@ContactId";
+      contactIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(contactIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._address = rdr.GetString(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     public static List<ContactInfo> GetAll()
     {
       List<ContactInfo> allContacts = new List<ContactInfo> {};
@@ -156,9 +188,6 @@ namespace Restaurant
       }
       return foundContactInfo;
     }
-
-
-
 
     public static void DeleteAll()
     {

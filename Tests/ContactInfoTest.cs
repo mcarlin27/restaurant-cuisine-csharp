@@ -41,10 +41,6 @@ namespace Restaurant
       //Assert
       Assert.Equal(testList, result);
     }
-    public void Dispose()
-    {
-      ContactInfo.DeleteAll();
-    }
     [Fact]
     public void Test_Save_AssignsIdToObject()
     {
@@ -69,8 +65,23 @@ namespace Restaurant
       //Assert
       Assert.Equal(testContactInfo, foundContactInfo);
     }
-
-
-
+    [Fact]
+    public void Test_Update_ReturnsTrueIfContactInfosAreTheSame()
+    {
+      //Arrange
+      Restaurant newRestaurant = new Restaurant("Saburos", "a sushi place", 2, 1);
+      newRestaurant.Save();
+      ContactInfo firstContactInfo = new ContactInfo("123 First st. Portland, OR", 2128675309, newRestaurant.GetId());
+      firstContactInfo.Save();
+      ContactInfo secondContactInfo = new ContactInfo("906 President st. Brooklyn, NY", 2128675309, newRestaurant.GetId(), firstContactInfo.GetId());
+      //Act
+      secondContactInfo.Update("123 First st. Portland, OR");
+      //Assert
+      Assert.Equal(firstContactInfo, secondContactInfo);
+    }
+    public void Dispose()
+    {
+      ContactInfo.DeleteAll();
+    }
   }
 }

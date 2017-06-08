@@ -32,20 +32,20 @@ namespace Restaurant
       //Assert
       Assert.Equal(firstCuisine, secondCuisine);
     }
-    [Fact]
-    public void Test_Save_SavesCuisineToDatabase()
-    {
-      //Arrange
-      Cuisine testCuisine = new Cuisine("Japanese");
-      testCuisine.Save();
-
-      //Act
-      List<Cuisine> result = Cuisine.GetAll();
-      List<Cuisine> testList = new List<Cuisine>{testCuisine};
-
-      //Assert
-      Assert.Equal(testList, result);
-    }
+    // [Fact]
+    // public void Test_Save_SavesCuisineToDatabase()
+    // {
+    //   //Arrange
+    //   Cuisine testCuisine = new Cuisine("Japanese");
+    //   testCuisine.Save();
+    //
+    //   //Act
+    //   List<Cuisine> result = Cuisine.GetAll();
+    //   List<Cuisine> testList = new List<Cuisine>{testCuisine};
+    //
+    //   //Assert
+    //   Assert.Equal(testList, result);
+    // }
     [Fact]
     public void Test_Save_AssignsIdToCuisineObject()
     {
