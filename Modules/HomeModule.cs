@@ -45,12 +45,12 @@ namespace Restaurant
 
       Post["/cuisines/clear"] = _ => {
         Cuisine.DeleteAll();
-        return View["cleared.cshtml"];
+        return View["cuisines.cshtml"];
       }; //deletes all cuisines
 
       Post["/restaurants/clear"] = _ => {
         Restaurant.DeleteAll();
-        return View["cleared.cshtml"];
+        return View["restaurants.cshtml"];
       }; //deletes all restaurants
 
       Get["/cuisines/{id}"] = parameters => {
