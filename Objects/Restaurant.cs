@@ -96,6 +96,39 @@ namespace Restaurant
       }
     }
 
+    public List<ContactInfo> GetContacts()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM contacts WHERE restaurant_id = @RestaurantId;", conn);
+      SqlParameter restaurantIdParameter = new SqlParameter();
+      restaurantIdParameter.ParameterName = "@RestaurantId";
+      restaurantIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(restaurantIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<ContactInfo> contacts = new List<ContactInfo> {};
+      while(rdr.Read())
+      {
+        int contactInfoId = rdr.GetInt32(0);
+        string contactInfoAddress = rdr.GetString(1);
+        int contactInfoPhone = rdr.GetInt32(2);
+        int contactRestaurantId = rdr.GetInt32(3);
+        ContactInfo newContactInfo = new ContactInfo(contactInfoAddress, contactInfoPhone, contactRestaurantId, contactInfoId);
+        contacts.Add(newContactInfo);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return contacts;
+    }
+
     public void Update(string newName, string newDescription)
     { //Update method for strings
       SqlConnection conn = DB.Connection();

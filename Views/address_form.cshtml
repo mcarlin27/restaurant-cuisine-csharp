@@ -1,0 +1,14 @@
+@{
+  Layout="Shared/_Layout";
+}
+
+<div class="container">
+  <h1>Add a new address for this restaurant</h1>
+  <form action="/address/new" method="post">
+    <label for="restaurant-address">Restaurant Address:</label>
+    <input id="restaurant-address" name="restaurant-address" type="text">
+    <label for="restaurant-phone">Restaurant Phone:</label>
+    <input id="restaurant-phone" name="restaurant-phone" type="number">
+    <input type="hidden" name="selected-restaurant" value='@Model.GetId()'>
+    <button type="submit">Submit</button>
+  </form>

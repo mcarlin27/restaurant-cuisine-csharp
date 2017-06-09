@@ -3,13 +3,32 @@
 }
 
 <div class="container">
-  <h1>@Model.GetName()</h1>
-  <h2>@Model.GetDescription()</h2>
+  <h1>@Model["restaurant"].GetName()</h1>
+  <h2>@Model["restaurant"].GetDescription()</h2>
 
-  <form action='/restaurant/edit/@Model.GetId()' method="get">
+  @if (@Model["contacts"] == null)
+  {
+    <p>No contact information yet!</p>
+  }
+  else
+  {
+    <ol>
+      @foreach (var contact in @Model["contacts"])
+      {
+        <li><a href="/restaurants/@contact.GetRestaurantId()">Address: @contact.GetAddress(), Phone: @contact.GetPhone()</li>
+      }
+    </ol>
+  }
+
+
+
+  <form action='/restaurant/new/address/@Model["restaurant"].GetId()' method="get">
+    <button type="submit">Add an Address</button>
+  </form>
+  <form action='/restaurant/edit/@Model["restaurant"].GetId()' method="get">
       <input type="hidden" name="restaurant-edit" id="restaurant-edit" value="restaurant-edit"><button type="submit">Edit this Restaurant</button>
   </form>
-  <form action='/restaurant/delete/@Model.GetId()' method="get">
+  <form action='/restaurant/delete/@Model["restaurant"].GetId()' method="get">
       <input type="hidden" name="restaurant-delete" id="restaurant-delete" value="restaurant-delete"><button type="submit">Delete this Restaurant</button>
   </form>
   <a href="/restaurants/new">Add another restaurant</a>
